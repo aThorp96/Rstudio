@@ -16,16 +16,16 @@ library(lsr)
 #Statistics
 
 ###Characterizing a set of data (3 S’s)
-  * Shape: how the data is distributed
+######Shape: how the data is distributed
   * Low outliers make a dataset skewed to the Right
   * High outliers make a dataset skewed to the Left
   * Normal distributions have fairly even outliers on either side
   
-###Center: Where the data is centered around
+######Center: Where the data is centered around
   * Normal: If the dataset has a normal distribution (shape) this can be calculated using the `mean($data)` function.
   * Skewed (left or right): The mean will be misrepresent the center. Calculate a skewed center using `median($data)`.
 
-###Spread: How far the data differs from the center
+######Spread: How far the data differs from the center
   * Normal: If the dataset has a normal distribution, then the standard deviation applies to both sides of the data and so it represents the spread.
   * Skewed (left or right): If the dataset is skewed on either side, the deviation above and below the center will not be the same, so you must calculate it using `IQR($data)` for the interquartile range.
 
@@ -81,7 +81,7 @@ t.test(weight~Diet, data=DF)          # Quickly gives us what we need to know
 
 ### Cohens'd (effect size)
   * The difference between a control group's mean, and an experiment group's mean, measured in standard deviations. 
-  * Measured using the following formula: $d=\frac{|M_control - M_experimental |}{SD}$
+  * Measured using the following formula: $d=\frac{|M_0 - M_1 |}{SD}$
   * How large is the effect size?
     + small if    |d| < 0.20
     + medium if   |d| < 0.5
@@ -94,7 +94,12 @@ Diet_4 <- filter(ChickWeight, Diet == 4)
 cohensD(Diet_4$weight, Diet_3$weight, method = "unequal") 
 ```
   
-  
-Markdown
+### Analysing a DataSet
+  * An analysis consists of 
+    + t-value
+    + p-value
+    + effect size (Cohen's D)
+  * 
+
 Dplyr
 Ggplot2
