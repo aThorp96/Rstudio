@@ -5,6 +5,9 @@ date: "October 9, 2017"
 output:
   pdf_document: default
 ---
+```{r}
+
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -51,7 +54,7 @@ t.test(weight~Diet, data=DF)          # Quickly gives us what we need to know
     
   3. Determine rejection region
     * Rejection region is the percent of data points on either end of a data set.
-    * Percentile is represented by alpha ($\alpha$)
+    * Percentile is represented by alpha ($\alpha$) (probability of a type 1 error)
     * Unless otherwise specified, assume rejection region to be 5% (0.05).
     
     
@@ -78,8 +81,11 @@ t.test(weight~Diet, data=DF)          # Quickly gives us what we need to know
     
     In the case of our example from above, we failed to reject the null hypothesis, so we **failed to find evidence supporting a weight difference in chicks between Diets 3 and 4**.
     * The English hypothesis must ALWAYS be written this way. You either find evidence to support $H_A$ or you fail to find evidence to support $H_A$.
+    * There is a chance for error:
+      + type 1 error: Assuming the Alternative hypothesis when the Null hypothesis is true.
+      + type 2 error: Assuming the Null hypothesis when the Alternative hypothesis is true. 
 
-### Cohens'd (effect size)
+### Cohens'd (effect size) **Not really used in this class**
   * The difference between a control group's mean, and an experiment group's mean, measured in standard deviations. 
   * Measured using the following formula: $d=\frac{|M_0 - M_1 |}{SD}$
   * How large is the effect size?
@@ -107,13 +113,22 @@ t.test(weight ~ Diet, data = DF)
 Diet_3 <- filter(DF, Diet == 3)
 Diet4 <- filter(DF, Diet == 4)
   cohensD(Diet_3$weight, Diet_4$weight, method = "unequal")
-
-
 ```
     From this we can gather the effect size is roughly 10% and, with a t-value of 75% and a p-value of 45%.
     TODO: ask about reading these statistics.
     
-### 
+### Probability
+  * Binomial probablility: The probablility of a binary outcome (not always 50%)
+    + Written X~Bin(#, <probability_of_true>)
+    + Programmed into R with `sum(dbinom(low#:high#, <number_of_trials>, <probablity>))`
+    
+```{r}
+#Probablity of making at LEAST 7 shots out of 10, with a 70% success rate (statistically)
+prob <- 0.7
+shots <- 7
+trials <- 10
+sum(dbinom(shots:trials, trials, prob))
+```
 
 Dplyr
 Ggplot2
