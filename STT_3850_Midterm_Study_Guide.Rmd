@@ -33,7 +33,7 @@ library(dplyr)
 ###Hypothesis testing (5 step procedure)
   * Z-Score: The number of Standard deviations an element is form the mean.
   * P-Score: 
-  * $\bar{X=mean}$
+  * $\bar{X}=mean$
   
   1. Specify the Null and ALternative hypothesis
     + Null hypothesis notated as $H_0:M=value$ or $\bar{M_1}-\bar{M_2}=0$
@@ -46,11 +46,7 @@ library(dplyr)
 ```{r}
 DF <- ChickWeight %>%                          #imports data frame
   filter(Diet %in% c(3:4))                     #then removes all collums except for 3 and 4
-DF %>% 
-  group_by(Diet) %>%                           #sorts the data frame by diet
-  summarize(mean(weight), var(weight), n())    #gives the the mean, variation, and number of observations by Diet
-  
-#weight~Diet means the weight value grouped by the Diet value.
+                                               #weight~Diet means the weight value grouped by the Diet value.
 t.test(weight~Diet, data=DF)                   # Quickly gives us what we need to know
 ```
 

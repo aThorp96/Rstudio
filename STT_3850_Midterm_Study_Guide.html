@@ -159,7 +159,7 @@ STT 3850 Midterm Study Guide
 <ul>
 <li>Z-Score: The number of Standard deviations an element is form the mean.</li>
 <li>P-Score:</li>
-<li><span class="math inline">\(\bar{X=mean}\)</span></li>
+<li><span class="math inline">\(\bar{X}=mean\)</span></li>
 </ul>
 <ol style="list-style-type: decimal">
 <li>Specify the Null and ALternative hypothesis
@@ -170,16 +170,24 @@ STT 3850 Midterm Study Guide
 <li>Test your staitstic using the Z-test or T-test
 <ul>
 <li><code>t.test(variable~catagoricalVariable, data=DF)</code> will perform the t-test on a set of data. If the data is not tidy your might want to use <code>dplyr</code> to tidy it up first.</li>
-</ul></li>
+</ul>
+Example:</li>
 </ol>
-<pre class="r"><code>DF &lt;- ChickWeight %&gt;% 
-  filter(Diet %in% c(3:4))
-DF %&gt;% 
-  group_by(Diet) %&gt;% 
-  summarize(mean(weight), var(weight), n())
-  
-#weight~Diet means the weight value grouped by the Diet value.
-t.test(weight~Diet, data=DF)</code></pre>
+<pre class="r"><code>DF &lt;- ChickWeight %&gt;%                          #imports data frame
+  filter(Diet %in% c(3:4))                     #then removes all collums except for 3 and 4
+                                               #weight~Diet means the weight value grouped by the Diet value.
+t.test(weight~Diet, data=DF)                   # Quickly gives us what we need to know</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  weight by Diet
+## t = 0.75908, df = 226.16, p-value = 0.4486
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -12.26840  27.64298
+## sample estimates:
+## mean in group 3 mean in group 4 
+##        142.9500        135.2627</code></pre>
 <p>Markdown Dplyr Ggplot2</p>
 </div>
 </div>
