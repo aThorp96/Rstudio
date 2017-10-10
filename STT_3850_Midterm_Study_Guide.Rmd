@@ -3,8 +3,6 @@ title: "<center> <h1>STT 3850 Midterm Study Guide</h1> <center>"
 author: "Andrew Thorp"
 date: "October 9, 2017"
 output:
-  html_document:
-    df_print: paged
   pdf_document: default
 ---
 
@@ -43,15 +41,42 @@ library(dplyr)
     + `t.test(variable~catagoricalVariable, data=DF)` will perform the t-test on a set of data. If the data is not tidy your might want to use `dplyr` to tidy it up first. 
     
     Example:
-```{r}
-DF <- ChickWeight %>%                          #imports data frame
-  filter(Diet %in% c(3:4))                     #then removes all collums except for 3 and 4
-                                               #weight~Diet means the weight value grouped by the Diet value.
-t.test(weight~Diet, data=DF)                   # Quickly gives us what we need to know
+```{r, results='hide'}
+DF <- ChickWeight %>%                 # Imports data frame
+  filter(Diet %in% c(3:4))            # Then removes all collums except for 3 and 4
+                                      # Weight~Diet means the weight across Diets value.
+t.test(weight~Diet, data=DF)          # Quickly gives us what we need to know
 ```
 
+  3. Determine rejection region
+    * Rejection region is the percent of data points on either end of a data set.
+    * Percentile is represented by alpha ($\alpha$)
+    * Unless otherwise specified, assume rejection region to be 5% (0.05).
+    
+    
+  4. Statistical conclusion. 
+     
+     You can either
+      * Reject the null hypothesis $H_0$ if $P<\alpha$
+      
+      or
+      * Fail to reject the null hypothesis $H_0$ if $P\geq\alpha$
+      
+      Based on the output below, P = 0.45, and we assume $\alpha$=0.05. P is far greater than $\alpha$, so we **fail to reject the null hypothesis** $H_0$.
+      
+```{r, echo=FALSE}
+DF <- ChickWeight %>%                 # Imports data frame
+  filter(Diet %in% c(3:4))            # Then removes all collums except for 3 and 4
+                                      # Weight~Diet means the weight across Diets value.
+t.test(weight~Diet, data=DF)          # Quickly gives us what we need to know
+```
 
-
+      
+  5. English conclusion (or Spanish, if that's your thing)
+    * The statistical conclusion deals with the null hypothesis $H_0$, but the English conclusion only deals with things in terms of the Alternative Hypothesis $H_A$ (written out)
+    
+    In the case of our example from above, we failed to reject the null hypothesis, so we **failed to find evidence supporting a weight difference in chicks between Diets 3 and 4**.
+    * The English hypothesis must ALWAYS be written this way. You either find evidence to support $H_A$ or you fail to find evidence to support $H_A$.
 
 Markdown
 Dplyr
