@@ -86,7 +86,7 @@ t.test(weight~Diet, data=DF)          # Quickly gives us what we need to know
     + small if    |d| < 0.20
     + medium if   |d| < 0.5
     + large if    |d| > 0.5
-  * Compute using R with `lsr.cohensD(post_data, pre_data, method = "paired")`
+  * Compute using R with `cohensD(post_data, pre_data, method = "paired")`
 ```{r, eval = FALSE}
 Diet_3 <- filter(ChickWeight, Diet == 3)
 Diet_4 <- filter(ChickWeight, Diet == 4)
@@ -99,7 +99,21 @@ cohensD(Diet_4$weight, Diet_3$weight, method = "unequal")
     + t-value
     + p-value
     + effect size (Cohen's D)
-  * 
+```{r}
+DF <- ChickWeight %>% 
+  filter(Diet %in% c(3:4))
+t.test(weight ~ Diet, data = DF)
+
+Diet_3 <- filter(DF, Diet == 3)
+Diet4 <- filter(DF, Diet == 4)
+  cohensD(Diet_3$weight, Diet_4$weight, method = "unequal")
+
+
+```
+    From this we can gather the effect size is roughly 10% and, with a t-value of 75% and a p-value of 45%.
+    TODO: ask about reading these statistics.
+    
+### 
 
 Dplyr
 Ggplot2
