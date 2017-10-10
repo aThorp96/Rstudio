@@ -40,7 +40,7 @@ library(lsr)
     
   2. Test your staitstic using the Z-test or T-test
     + `t.test(variable~catagoricalVariable, data=DF)` will perform the t-test on a set of data. If the data is not tidy your might want to use `dplyr` to tidy it up first. 
-    
+    + Alternatively, if we have an expected mean, and our data has the experimental mean, we can call the `t.test` function as such: `t.test(experimental_data, mu = <expected_mean>)`
     Example:
 ```{r, results='hide'}
 DF <- ChickWeight %>%                 # Imports data frame
@@ -48,7 +48,7 @@ DF <- ChickWeight %>%                 # Imports data frame
                                       # Weight~Diet means the weight across Diets value.
 t.test(weight~Diet, data=DF)          # Quickly gives us what we need to know
 ```
-
+    
   3. Determine rejection region
     * Rejection region is the percent of data points on either end of a data set.
     * Percentile is represented by alpha ($\alpha$)
@@ -99,7 +99,7 @@ cohensD(Diet_4$weight, Diet_3$weight, method = "unequal")
     + t-value
     + p-value
     + effect size (Cohen's D)
-```{r}
+```{r, eval = FALSE}
 DF <- ChickWeight %>% 
   filter(Diet %in% c(3:4))
 t.test(weight ~ Diet, data = DF)
