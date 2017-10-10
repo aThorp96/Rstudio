@@ -10,6 +10,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(dplyr)
+library(lsr)
 ```
 
 #Statistics
@@ -62,7 +63,7 @@ t.test(weight~Diet, data=DF)          # Quickly gives us what we need to know
       or
       * Fail to reject the null hypothesis $H_0$ if $P\geq\alpha$
       
-      Based on the output below, P = 0.45, and we assume $\alpha$=0.05. P is far greater than $\alpha$, so we **fail to reject the null hypothesis** $H_0$.
+      Based on the output from the previous example pictured below, P = 0.45, and we assume $\alpha$=0.05. P is far greater than $\alpha$, so we **fail to reject the null hypothesis** $H_0$.
       
 ```{r, echo=FALSE}
 DF <- ChickWeight %>%                 # Imports data frame
@@ -78,6 +79,22 @@ t.test(weight~Diet, data=DF)          # Quickly gives us what we need to know
     In the case of our example from above, we failed to reject the null hypothesis, so we **failed to find evidence supporting a weight difference in chicks between Diets 3 and 4**.
     * The English hypothesis must ALWAYS be written this way. You either find evidence to support $H_A$ or you fail to find evidence to support $H_A$.
 
+### Cohens'd (effect size)
+  * The difference between a control group's mean, and an experiment group's mean, measured in standard deviations. 
+  * Measured using the following formula: $d=\frac{|M_control - M_experimental |}{SD}$
+  * How large is the effect size?
+    + small if    |d| < 0.20
+    + medium if   |d| < 0.5
+    + large if    |d| > 0.5
+  * Compute using R with `lsr.cohensD(post_data, pre_data, method = "paired")`
+```{r, eval = FALSE}
+Diet_3 <- filter(ChickWeight, Diet == 3)
+Diet_4 <- filter(ChickWeight, Diet == 4)
+#method should normally be "paired", but the sample size was different
+cohensD(Diet_4$weight, Diet_3$weight, method = "unequal") 
+```
+  
+  
 Markdown
 Dplyr
 Ggplot2
