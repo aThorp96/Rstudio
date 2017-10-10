@@ -13,12 +13,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #Statistics
 ##Characterizing a set of data (3 S’s)
-###Shape: how the data is distributed
-####Low outliers make a dataset skewed to the Right
-####High outliers make a dataset skewed to the Left
-####Normal distributions have fairly even outliers on either side
-###Center: Where the data is centered around
-####Normal: If the dataset has a normal distribution (shape) this can be calculated using the `mean($data)` function.  
+* Shape: how the data is distributed
+  + Low outliers make a dataset skewed to the Right
+  + High outliers make a dataset skewed to the Left
+  + Normal distributions have fairly even outliers on either side
+* Center: Where the data is centered around
+Normal: If the dataset has a normal distribution (shape) this can be calculated using the `mean($data)` function.  
 ####Skewed (left or right): The mean will be misrepresent the center. Calculate a skewed center using `median($data)`.
 ####Spread: How far the data differs from the center
 Normal: If the dataset has a normal distribution, then the standard deviation applies to both sides of the data and so it represents the spread.
