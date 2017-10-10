@@ -129,12 +129,8 @@ STT 3850 Midterm Study Guide
 </div>
 
 
-#
-<center>
-<h1>
-Statistics
-</h1>
-</center>
+<div id="statistics" class="section level1">
+<h1>Statistics</h1>
 <div id="characterizing-a-set-of-data-3-ss" class="section level3">
 <h3>Characterizing a set of data (3 S’s)</h3>
 <ul>
@@ -160,7 +156,32 @@ Statistics
 </div>
 <div id="hypothesis-testing-5-step-procedure" class="section level3">
 <h3>Hypothesis testing (5 step procedure)</h3>
+<ul>
+<li>Z-Score: The number of Standard deviations an element is form the mean.</li>
+<li>P-Score:</li>
+<li><span class="math inline">\(\bar{X=mean}\)</span></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Specify the Null and ALternative hypothesis
+<ul>
+<li>Null hypothesis notated as <span class="math inline">\(H_0:M=value\)</span> or <span class="math inline">\(\bar{M_1}-\bar{M_2}=0\)</span></li>
+<li>Alternative hypothesis notated as <span class="math inline">\(H_A:M\neq0\)</span></li>
+</ul></li>
+<li>Test your staitstic using the Z-test or T-test
+<ul>
+<li><code>t.test(variable~catagoricalVariable, data=DF)</code> will perform the t-test on a set of data. If the data is not tidy your might want to use <code>dplyr</code> to tidy it up first.</li>
+</ul></li>
+</ol>
+<pre class="r"><code>DF &lt;- ChickWeight %&gt;% 
+  filter(Diet %in% c(3:4))
+DF %&gt;% 
+  group_by(Diet) %&gt;% 
+  summarize(mean(weight), var(weight), n())
+  
+#weight~Diet means the weight value grouped by the Diet value.
+t.test(weight~Diet, data=DF)</code></pre>
 <p>Markdown Dplyr Ggplot2</p>
+</div>
 </div>
 
 

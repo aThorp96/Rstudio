@@ -3,14 +3,19 @@ title: "<center> <h1>STT 3850 Midterm Study Guide</h1> <center>"
 author: "Andrew Thorp"
 date: "October 9, 2017"
 output:
+  html_document:
+    df_print: paged
   pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
 ```
 
 #Statistics
+
 ###Characterizing a set of data (3 S’s)
   * Shape: how the data is distributed
   * Low outliers make a dataset skewed to the Right
@@ -26,11 +31,31 @@ knitr::opts_chunk$set(echo = TRUE)
   * Skewed (left or right): If the dataset is skewed on either side, the deviation above and below the center will not be the same, so you must calculate it using `IQR($data)` for the interquartile range.
 
 ###Hypothesis testing (5 step procedure)
+  * Z-Score: The number of Standard deviations an element is form the mean.
+  * P-Score: 
+  * $\bar{X=mean}$
+  
   1. Specify the Null and ALternative hypothesis
     + Null hypothesis notated as $H_0:M=value$ or $\bar{M_1}-\bar{M_2}=0$
     + Alternative hypothesis notated as $H_A:M\neq0$
     
-  2. 
+  2. Test your staitstic using the Z-test or T-test
+    + `t.test(variable~catagoricalVariable, data=DF)` will perform the t-test on a set of data. If the data is not tidy your might want to use `dplyr` to tidy it up first. 
+    
+    Example:
+```{r}
+DF <- ChickWeight %>%                          #imports data frame
+  filter(Diet %in% c(3:4))                     #then removes all collums except for 3 and 4
+DF %>% 
+  group_by(Diet) %>%                           #sorts the data frame by diet
+  summarize(mean(weight), var(weight), n())    #gives the the mean, variation, and number of observations by Diet
+  
+#weight~Diet means the weight value grouped by the Diet value.
+t.test(weight~Diet, data=DF)                   # Quickly gives us what we need to know
+```
+
+
+
 
 Markdown
 Dplyr
