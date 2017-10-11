@@ -13,7 +13,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(dplyr)
-library(lsr)
 ```
 
 #Statistics
@@ -130,5 +129,8 @@ trials <- 10
 sum(dbinom(shots:trials, trials, prob))
 ```
 
-Dplyr
-Ggplot2
+### Dplyr
+
+### Ggplot2
+  * 
+
