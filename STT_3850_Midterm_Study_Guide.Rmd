@@ -5,10 +5,6 @@ date: "October 9, 2017"
 output:
   pdf_document: default
 ---
-```{r}
-
-```
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
@@ -129,8 +125,26 @@ trials <- 10
 sum(dbinom(shots:trials, trials, prob))
 ```
 
-### Dplyr
+### Probability in R (by Corrinne)
+* X ~ Binomial (number of random draws, probability)
 
-### Ggplot2
-  * 
+* `rbinom()` function can be used to simulate N independent binomial random variables.
+* `rbinom(number of random draws, number of coins we are flipping on each draw, probability)`
+
+```{r}
+# Generate 20 occurrences of flipping 10 coins, each with 30% probability
+flips <- rbinom(200, 10, 0.3)
+# Find the probability of 5 of the coins being heads
+mean(flips == 5)
+
+# Or
+dbinom(5, 10, 0.3)
+```
+
+* `dbinom()` function is used to calculate *exact probability density* (binomial distribution)
+  + probability density of a specific outcome (5 heads )
+* `dbinom(mean, number of coins flipping, probability)` 
+  + probability density of outcomes up to a point ( 4 of fewer heads )
+
+* `pbinom()` function is used to calculate *exact cumulative density* of the binomial
 
