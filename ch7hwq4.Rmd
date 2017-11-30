@@ -1,0 +1,73 @@
+---
+title: "Chapter Seven Homework"
+author: ""
+date: '`r format(Sys.time(), "%A, %b %d, %Y - %X")`'
+output: bookdown::html_document2
+---
+
+*This is entirely our own work except as noted at the end of the document.*
+
+
+```{r setup, comment = NA, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, cache = TRUE, fig.show='hold',fig.height=4, fig.width=4)
+library(e1071)
+library(tidyverse)
+theme_set(theme_bw())
+theme_update(plot.title = element_text(hjust = 0.5))
+```
+
+
+**Prob4** - Run a simulation to see if the $t$ ratio $T = (\bar{X} -\mu)/(S/\sqrt{n})$ has a $t$ distribution or even an approximate $t$ distribution when the samples are drawn from a nonnormal distribution.  Be sure to superimpose the appropriate $t$ density curve over the density of your simulated $T$.  Try two different nonnormal distributions $\left( Unif(a = 0, b = 1), Exp(\lambda = 1) \right)$ and remember to see if sample size makes a difference (use $n = 15$ and $n=500$).
+
+```{r prob4}
+sims <- 10^4
+xbar <- numeric(sims)
+SD <- numeric(sims)
+mu <- 100
+sigma <- 10
+n1 <- 15
+n2 <- 500
+n1expbar <- numeric(sims)
+n2expbar <- numeric(sims)
+n1unifbar <- numeric(sims)
+n2unifbar <- numeric(sims)
+
+n1expSD <- numeric(sims)
+n2expSD <- numeric(sims)
+n1unifSD <- numeric(sims)
+n2unifSD <- numeric(sims)
+
+lambda <- 1
+
+for (i in 1:sims) {
+  xn1exp <- rexp(n1, lambda)
+  xn2exp <- rexp(n2, lambda)
+  xn1unif <- runif(n1, min = 0, max = 1)
+  xn2unif <- runif(n2, min = 0, max = 1)
+  
+  n1expbar[i] <- mean(xn1exp)
+  n2expbar[i] <- mean(xn2exp)
+  n1unifbar[i] <- mean(xn1unif)
+  n2unifbar[i] <- mean(xn2unif)
+  
+  n1expSD[i] <- sd(xn1exp)
+  n2expSD[i] <- sd(xn2exp)
+  n1unifSD[i] <- sd(xn1unif)
+  n2unifSD[i] <- sd(xn2unif)
+}
+
+df <- data.frame(
+  value = c(n1expbar, n2expbar, n1unifbar, n2unifbar),
+  dist = rep(c("Exponential", "Uniform"), times = 1, each = 2*sims),
+  n = rep(c(15, 500), times = 2, each = sims)
+)
+
+t<- (xbar - mu) / (SD / sqrt(n))
+df %>% 
+  ggplot(aes(x = value)) +
+  geom_density() +
+  facet_grid(dist ~ n) + 
+  geom_line(aes(y = dt(value, sims-1), color = "red"))
+
+```
+
